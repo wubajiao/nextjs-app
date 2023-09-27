@@ -1,3 +1,10 @@
+/*
+ * @Descripttion : 
+ * @Author       : wuhaidong
+ * @Date         : 2023-09-27 10:13:32
+ * @LastEditors  : wuhaidong
+ * @LastEditTime : 2023-09-27 12:07:26
+ */
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
