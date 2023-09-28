@@ -3,14 +3,16 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 12:01:56
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-09-27 17:41:28
+ * @LastEditTime : 2023-09-27 17:55:27
  */
-import { ColorPicker } from 'antd'
+import Header from './Header'
+import styles from './page.module.scss'
+
 function leeks() {
   return (
-    <div className="home">
-      <ColorPicker />
-      leeks
+    <div className={styles.fightPage}>
+      <Header />
+      fight-page
     </div>
   )
 }
