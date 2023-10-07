@@ -3,15 +3,15 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 17:44:05
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-10-07 17:42:59
+ * @LastEditTime : 2023-10-07 18:01:01
  */
 'use client'
 import React from 'react'
 import { Divider } from '@nextui-org/react'
-import styles from './ContentLeft.module.scss'
-import Panel from './components/Panel'
-import Icon from './components/Icon'
-import Title from './components/Title'
+import styles from './index.module.scss'
+import Panel from '../components/Panel'
+import Icon from '../components/Icon'
+import Title from '../components/Title'
 
 const list = [
   {

@@ -3,12 +3,12 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 17:44:05
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-09-28 16:18:54
+ * @LastEditTime : 2023-10-07 17:58:54
  */
 'use client'
 import React from 'react'
 import { Divider } from '@nextui-org/react'
-import styles from './Header.module.scss'
+import styles from './index.module.scss'
 const list = [
   { label: '上证指数', total: 3053.22, percent: -0.7, range: -17.8 },
   { label: '深成指数', total: 3053.22, percent: 0.7, range: 17.8 },

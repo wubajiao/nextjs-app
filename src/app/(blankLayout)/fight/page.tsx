@@ -3,14 +3,17 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 12:01:56
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-10-06 12:40:45
+ * @LastEditTime : 2023-10-07 18:10:32
  */
 'use client'
 import React, { useEffect } from 'react'
+import autofit from 'autofit.js'
 import Header from './Header'
 import ContentLeft from './ContentLeft'
+import ContentCenter from './ContentCenter'
+import ContentRight from './ContentRight'
+
 import styles from './page.module.scss'
-import autofit from 'autofit.js'
 
 const Leeks = () => {
   useEffect(() => {
@@ -34,6 +37,8 @@ const Leeks = () => {
       <Header />
       <div className={styles.content}>
         <ContentLeft />
+        <ContentCenter />
+        <ContentRight />
       </div>
     </div>
   )
