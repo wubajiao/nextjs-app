@@ -1,5 +1,31 @@
+@import '../_available.scss';
+
 .contentLeft {
   width: 420px;
   display: flex;
   flex-direction: column;
+  .box {
+    min-height: 440px;
+    .right {
+      display: flex;
+      color: #ccc;
+    }
+    .tbody {
+      .th,
+      .tr {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 6px;
+        .up {
+          color: $up-color;
+        }
+        .down {
+          color: $down-color;
+        }
+      }
+      .th {
+        color: #999;
+      }
+    }
+  }
 }

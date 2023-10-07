@@ -1,0 +1,14 @@
+.title {
+  height: 20px;
+  line-height: 20px;
+  display: flex;
+  justify-content: space-between;
+  border-left: 2px solid #cccccc;
+  padding-left: 8px;
+  margin-bottom: 8px;
+  color: #fff;
+
+  .left {
+    color: #cccccc;
+  }
+}
