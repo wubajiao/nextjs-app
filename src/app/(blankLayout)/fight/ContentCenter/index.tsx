@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 17:44:05
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-10-08 16:37:22
+ * @LastEditTime : 2023-10-08 21:57:16
  */
 'use client'
 import React, { useRef, useEffect } from 'react'
@@ -121,9 +121,10 @@ export default function ContentCenter() {
         },
       },
       grid: {
-        left: '1%',
-        right: '1%',
-        bottom: '1%',
+        left: '3%',
+        right: '3%',
+        bottom: '3%',
+        top: '25%',
         containLabel: true,
       },
       series: [
@@ -218,7 +219,7 @@ export default function ContentCenter() {
         })}
       </Panel>
       <Panel className={styles.chart}>
-        <div ref={chartRef} style={{ height: '100%', width: '100%' }} />
+        <div ref={chartRef} style={{ height: '100%', width: '100%' }} id="chart" />
       </Panel>
     </div>
   )

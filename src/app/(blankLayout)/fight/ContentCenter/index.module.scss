@@ -36,11 +36,11 @@
     .card {
       background-color: #1b1c1e;
       width: 160px;
-      height: 100px;
+      height: 94px;
       padding: 16px 24px;
       z-index: 1000;
       .label {
-        margin-bottom: 24px;
+        margin-bottom: 16px;
       }
       .number {
         color: #ccc;
@@ -77,6 +77,7 @@
 
   .chart {
     display: flex;
+    width: 100%;
     flex: 1;
     // padding: 0;
     // margin-bottom: 12px;

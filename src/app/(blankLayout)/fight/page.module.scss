@@ -7,5 +7,28 @@
   .content {
     display: flex;
     justify-content: space-between;
+
+    /* 设置滚动条的样式 */
+    ::-webkit-scrollbar {
+      width: 1px; /* 滚动条宽度 */
+      // height: 8px; /* 滚动条高度 */
+    }
+
+    /* 设置滚动条轨道的样式 */
+    ::-webkit-scrollbar-track {
+      background-color: #24262d; /* 滚动条轨道背景色 */
+      border-radius: 4px; /* 滚动条轨道圆角 */
+    }
+
+    /* 设置滚动条滑块的样式 */
+    ::-webkit-scrollbar-thumb {
+      background-color: #24262d; /* 滚动条滑块背景色 */
+      border-radius: 4px; /* 滚动条滑块圆角 */
+    }
+
+    /* 鼠标悬停在滚动条上时的样式 */
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #24262d; /* 滚动条滑块背景色 */
+    }
   }
 }

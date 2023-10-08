@@ -4,4 +4,71 @@
   width: 420px;
   display: flex;
   flex-direction: column;
+
+  .hot {
+    height: 380px;
+    .hotItem {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      .index {
+        width: 30px;
+      }
+      .name {
+        width: 140px;
+        text-align: start;
+      }
+      .up {
+        color: $up-color;
+      }
+      .down {
+        color: $down-color;
+      }
+      .normal {
+        color: #ccc;
+      }
+      .value {
+        width: 100px;
+        text-align: end;
+      }
+    }
+  }
+
+  .newsWrap {
+    .news {
+      height: 470px;
+      overflow-y: scroll;
+
+      .newItem {
+        display: flex;
+        margin-bottom: 12px;
+        .left {
+          color: #ccc;
+          margin-right: 16px;
+        }
+        .right {
+          .title {
+            font-size: 14px;
+            color: #fff;
+            font-weight: 600;
+          }
+          .content {
+            // 设置三行省略号
+            overflow: hidden;
+            max-height: initial;
+            // Webkit solution for multiline ellipsis
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            // Solution for Opera
+            text-overflow: -o-ellipsis-lastline;
+
+            font-size: 14px;
+            color: #ccc;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
 }

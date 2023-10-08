@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 12:01:56
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-10-07 23:18:21
+ * @LastEditTime : 2023-10-08 21:55:45
  */
 'use client'
 import React, { useEffect } from 'react'
@@ -28,7 +28,7 @@ const Leeks = () => {
       resize: true,
       transition: 0,
       delay: 0,
-      ignore: [],
+      // ignore: ['#chart'],
     })
   }
 
