@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 12:01:56
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-10-07 18:10:32
+ * @LastEditTime : 2023-10-07 23:18:21
  */
 'use client'
 import React, { useEffect } from 'react'
@@ -33,7 +33,7 @@ const Leeks = () => {
   }
 
   return (
-    <div className={styles.fightPage}>
+    <div id="app" className={styles.fightPage}>
       <Header />
       <div className={styles.content}>
         <ContentLeft />
