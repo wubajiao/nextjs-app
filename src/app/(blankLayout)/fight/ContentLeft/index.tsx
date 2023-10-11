@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 17:44:05
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-10-08 22:23:23
+ * @LastEditTime : 2023-10-11 12:05:34
  */
 'use client'
 import React from 'react'
@@ -126,12 +126,11 @@ export default function Header() {
       <Panel className={`${styles.box} ${styles.boxTop} `}>
         <Title name="持仓">
           <div className={styles.right}>
-            <Icon type="control" />
-            <Icon type="reload" />
-            <Icon type="plus" />
+            <Icon type="control" tooltipProps={{ title: '排序' }} />
+            <Icon type="reload" tooltipProps={{ title: '刷新' }} />
+            <Icon type="plus" tooltipProps={{ title: '添加持仓' }} />
           </div>
         </Title>
-
         <div className={styles.th}>
           <div>涨跌幅</div>
           <div>最新价</div>
@@ -159,9 +158,9 @@ export default function Header() {
       <Panel className={`${styles.box} ${styles.boxBottom} `}>
         <Title name="自选">
           <div className={styles.right}>
-            <Icon type="control" />
-            <Icon type="reload" />
-            <Icon type="plus" />
+            <Icon type="control" tooltipProps={{ title: '排序' }} />
+            <Icon type="reload" tooltipProps={{ title: '刷新' }} />
+            <Icon type="plus" tooltipProps={{ title: '添加自选' }} />
           </div>
         </Title>
 
