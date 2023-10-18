@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 17:44:05
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-10-08 22:10:32
+ * @LastEditTime : 2023-10-13 10:53:19
  */
 'use client'
 import React from 'react'
@@ -228,8 +228,10 @@ export default function ContentRight() {
         <Title name="热股" style={{ marginBottom: 24 }}></Title>
         {list.map((item, index) => {
           return (
-            <div key={item.name} className={styles.hotItem}>
-              <div className={`${styles.index} ${index < 3 && styles.up}`}>{index + 1}</div>
+            <div key={item.code} className={styles.hotItem}>
+              <div className={`${styles.index} ${index < 3 && styles.up}`}>
+                {index + 1}
+              </div>
               <div className={styles.name}>{item.name}</div>
               <Icon
                 type={item.increment > 0 ? 'arrowup' : 'arrowdown'}
@@ -238,9 +240,11 @@ export default function ContentRight() {
                 } ${item.increment === 0 && styles.normal}`}
               />
               <div
-                className={`${styles.value} ${item.increment > 0 && styles.up} ${
-                  item.increment < 0 && styles.down
-                } ${item.increment === 0 && styles.normal}`}
+                className={`${styles.value} ${
+                  item.increment > 0 && styles.up
+                } ${item.increment < 0 && styles.down} ${
+                  item.increment === 0 && styles.normal
+                }`}
               >
                 {item.value}
               </div>

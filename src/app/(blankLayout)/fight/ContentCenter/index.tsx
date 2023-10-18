@@ -185,7 +185,11 @@ export default function ContentCenter() {
           return (
             <div key={item.name} className={styles.card}>
               <div className={styles.label}>{item.name}</div>
-              <div className={`${styles.number} ${item.current > 0 ? styles.up : styles.down}`}>
+              <div
+                className={`${styles.number} ${
+                  item.current > 0 ? styles.up : styles.down
+                }`}
+              >
                 {item.current}
               </div>
             </div>
@@ -219,7 +223,11 @@ export default function ContentCenter() {
         })}
       </Panel>
       <Panel className={styles.chart}>
-        <div ref={chartRef} style={{ height: '100%', width: '100%' }} id="chart" />
+        <div
+          ref={chartRef}
+          style={{ height: '100%', width: '100%' }}
+          id="chart"
+        />
       </Panel>
     </div>
   )

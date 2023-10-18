@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 14:59:23
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-09-27 16:12:27
+ * @LastEditTime : 2023-10-13 10:54:54
  */
 import Link from 'next/link'
 import styles from './index.module.scss'
@@ -24,7 +24,7 @@ export default function Header() {
               { name: '老九作战中心', link: '/fight' },
             ].map((item) => {
               return (
-                <Link key={item.name} href={item.link}>
+                <Link key={item.link} href={item.link}>
                   <div className={styles.item}>{item.name}</div>
                 </Link>
               )
