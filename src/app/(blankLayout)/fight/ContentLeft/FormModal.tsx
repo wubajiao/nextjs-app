@@ -3,13 +3,13 @@
  * @Author       : wuhaidong
  * @Date         : 2023-10-11 12:09:33
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-10-13 16:41:13
+ * @LastEditTime : 2023-10-19 23:21:49
  */
 'use client'
 
 import React, { useState } from 'react'
 import { Modal, Button, Input, ConfigProvider, theme } from 'antd'
-import throttle from '@/utils/throttle'
+import { useThrottleEffect } from 'ahooks'
 import request from '@/utils/request'
 
 import styles from './FormModal.module.scss'
@@ -21,6 +21,26 @@ export default function FormModal({
   onCancel,
 }: any) {
   const [result, setResult] = useState([])
+  const [value, setValue] = useState<any>(null)
+
+  useThrottleEffect(
+    () => {
+      if (!value) return
+      request
+        .get(`/allStock/query?keyword=${value}`)
+        .then((response) => {
+          const { data } = response
+          setResult(data)
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    },
+    [value],
+    {
+      wait: 1500,
+    }
+  )
 
   return (
     <ConfigProvider
@@ -36,26 +56,13 @@ export default function FormModal({
         open={open}
         onCancel={onCancel}
         okButtonProps={{ type: 'primary', danger: true }}
-        afterClose={()=>setResult([])}
+        afterClose={() => setResult([])}
       >
         <Input
           className={styles.input}
+          value={value}
           placeholder="请输入关键字查询，如：000001或上证指数"
-          onChange={(e) => {
-            // TODO 搜索节流优化
-            const { value } = e.target
-            if (value) {
-              request
-                .get(`/allStock/query?keyword=${value}`)
-                .then((response) => {
-                  const { data } = response
-                  setResult(data)
-                })
-                .catch((error) => {
-                  console.error(error)
-                })
-            }
-          }}
+          onChange={(e) => setValue(e.target.value)}
         />
         <div className={styles.result}>
           {result.map((item: any) => {

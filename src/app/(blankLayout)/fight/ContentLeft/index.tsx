@@ -3,11 +3,12 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 17:44:05
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-10-13 17:57:02
+ * @LastEditTime : 2023-10-19 23:11:32
  */
 'use client'
 import React, { useState, useEffect } from 'react'
 import { message } from 'antd'
+import { useInterval } from 'ahooks'
 import styles from './index.module.scss'
 import Panel from '../components/Panel'
 import Icon from '../components/Icon'
@@ -17,6 +18,7 @@ import throttle from '@/utils/throttle'
 import debounce from '@/utils/debounce'
 import request from '@/utils/request'
 import * as API from '@/api/stock'
+import { type } from 'os'
 
 const list = [
   {
@@ -41,7 +43,9 @@ const list = [
 
 export default function ContentLeft() {
   const [holdData, setHoldData] = useState<any>([]) // 持仓
+  const [holdRealData, setHoldRealData] = useState<any>([]) // 持仓实时
   const [optionalData, setOptionalData] = useState<any>([]) // 自选
+  const [optionalRealData, setOptionalRealData] = useState<any>([]) // 自选实时
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [addType, setAddType] = useState<any>(null) // 1-持仓、0-自选
   useEffect(() => {
@@ -49,6 +53,27 @@ export default function ContentLeft() {
     getHoldData()
   }, [])
 
+  useEffect(() => {
+    if (!optionalData.length) return
+    getOptionalRealData(optionalData, 'optional')
+  }, [optionalData])
+
+  useEffect(() => {
+    if (!holdData.length) return
+    getOptionalRealData(holdData, 'hold')
+  }, [holdData])
+
+  useInterval(() => {
+    if (holdData.length) {
+      getOptionalRealData(holdData, 'hold')
+    }
+
+    if (optionalData.length) {
+      getOptionalRealData(optionalData, 'optional')
+    }
+  }, 80000)
+
+  // 获取持仓列表
   const getHoldData = () => {
     request
       .get(API.stock_hold)
@@ -61,6 +86,7 @@ export default function ContentLeft() {
       })
   }
 
+  // 获取自选列表
   const getOptionalData = () => {
     request
       .get(API.stock)
@@ -73,11 +99,51 @@ export default function ContentLeft() {
       })
   }
 
+  // 自选和实时股票列表数据结合
+  const getCurrentRealtime = (list: any, realList: any) => {
+    const newData: any = []
+    list.forEach((item: any, i: number) => {
+      let newItem = {}
+      for (let i = 0; i < realList.length; i++) {
+        if (realList[i]?.symbol.includes(item.code)) {
+          newItem = {
+            ...item,
+            ...realList[i],
+          }
+        }
+      }
+      newData.push(newItem)
+    })
+
+    return newData
+  }
+
+  // 自选实时数据
+  const getOptionalRealData = (listData: any, type = 'optional') => {
+    let symbolString = ''
+    listData.forEach((item: any, i: number) => {
+      let string = `${item.exchange.toUpperCase()}${item.code}` // 转为大写
+      symbolString = `${symbolString}${i !== 0 ? ',' : ''}${string}`
+    })
+    request
+      .get(`${API.realtime}?symbol=${symbolString}`)
+      .then((realResponse) => {
+        const realData = realResponse.data
+        const concatData = getCurrentRealtime(listData, realData)
+        if (type === 'optional') {
+          setOptionalRealData(concatData)
+        } else {
+          setHoldRealData(concatData)
+        }
+      })
+  }
+
   const handleAdd = (item: any) => {
     request
       .post(API.stock, {
         code: item.code,
         name: item.name,
+        exchange: item.exchange,
         type: addType,
       })
       .then((response) => {
@@ -136,7 +202,7 @@ export default function ContentLeft() {
             <div>持仓成本</div>
           </div>
           <div className={styles.tbody}>
-            {holdData.map((item: any) => {
+            {holdRealData.map((item: any) => {
               return (
                 <div key={item.id} className={styles.tr}>
                   <div className={item.percent > 0 ? styles.up : styles.down}>
@@ -145,8 +211,8 @@ export default function ContentLeft() {
                   </div>
                   <div>{item.current}</div>
                   <div>{item.name}</div>
-                  <div>{item.holdNumber}</div>
-                  <div>{item.cost}</div>
+                  <div>{item.holdNumber || '--'}</div>
+                  <div>{item.cost || '--'}</div>
                 </div>
               )
             })}
@@ -179,7 +245,8 @@ export default function ContentLeft() {
             <div>成交量</div>
           </div>
           <div className={styles.tbody}>
-            {optionalData.map((item: any) => {
+            {optionalRealData.map((item: any) => {
+              const volume = Math.floor(item?.volume / 100)
               return (
                 <div key={item.id} className={styles.tr}>
                   <div className={item.percent > 0 ? styles.up : styles.down}>
@@ -190,7 +257,7 @@ export default function ContentLeft() {
                     {item.current}
                   </div>
                   <div>{item.name}</div>
-                  <div>{item.holdNumber}手</div>
+                  <div>{volume}手</div>
                 </div>
               )
             })}
@@ -198,7 +265,7 @@ export default function ContentLeft() {
         </Panel>
       </div>
       <FormModal
-        title={`添加${addType===1?'持仓': '自选'}`}
+        title={`添加${addType === 1 ? '持仓' : '自选'}`}
         open={isModalOpen}
         onAdd={handleAdd}
         onCancel={() => setIsModalOpen(false)}
