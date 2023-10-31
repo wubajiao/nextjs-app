@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-10-12 11:30:09
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-10-13 16:51:28
+ * @LastEditTime : 2023-10-30 14:50:29
  */
 import axios from 'axios'
 import { message } from 'antd'
@@ -51,16 +51,14 @@ instance.interceptors.response.use(
       // 根据HTTP状态码处理不同的错误情况
       switch (status) {
         case 401: // 未授权错误
-          // 处理未授权错误，例如跳转到登录页面
           message.error('未授权，请先登录！')
           break
         case 403: // 禁止访问错误
           message.error('没有权限！')
-          // 处理禁止访问错误
+
           break
         case 404: // 未找到错误
           console.error('404', status, data)
-          // 处理未找到错误
           break
         case 400: // 客户端错误
           message.error(data.message)
