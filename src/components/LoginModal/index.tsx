@@ -3,15 +3,13 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 14:59:23
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-10-31 15:27:52
+ * @LastEditTime : 2023-10-31 16:02:49
  */
 'use client'
 import React, { useState, useEffect } from 'react'
-import { Modal, Tabs, Form, Input, Button, Row, Col, message } from 'antd'
-import { useInterval } from 'ahooks'
+import { Modal, Tabs, Form, Input, Button, message } from 'antd'
 import request from '@/utils/request'
 import styles from './index.module.scss'
-import { register } from 'module'
 
 export default function LoginModal({ open, setOpen }: any) {
   const [form] = Form.useForm()
@@ -37,11 +35,9 @@ export default function LoginModal({ open, setOpen }: any) {
   // 确认密码
   const validatePassword = (_: any, value: any) => {
     const { getFieldValue } = form
-
     if (value && value !== getFieldValue('password')) {
       return Promise.reject('密码不一致')
     }
-
     return Promise.resolve()
   }
 
@@ -67,11 +63,10 @@ export default function LoginModal({ open, setOpen }: any) {
   const getCode = () => {
     const { getFieldValue } = registerForm
     const email = getFieldValue('email')
-    console.log('🚀 ~ file: index.tsx:54 ~ getCode ~ email:', email)
     request
       .post(`/user/sendcode`, { email })
       .then((response) => {
-        message.success('获取成功')
+        message.success('发送成功')
         setCodeStatus(true)
         setCount(60)
       })
@@ -93,6 +88,129 @@ export default function LoginModal({ open, setOpen }: any) {
       })
   }
 
+  const tabItems = [
+    {
+      key: 'login',
+      label: '登录',
+      children: (
+        <Form layout="vertical" onFinish={handleLogin} form={form}>
+          <Form.Item
+            label="邮箱"
+            name="email"
+            rules={[
+              { required: true, message: '请输入邮箱' },
+              {
+                type: 'email',
+                message: '请输入有效的邮箱地址！',
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="密码"
+            name="password"
+            rules={[{ required: true, message: '请输入密码' }]}
+          >
+            <Input.Password />
+          </Form.Item>
+
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{ width: '100%', marginTop: 30 }}
+            >
+              登录
+            </Button>
+          </Form.Item>
+          <div style={{ textAlign: 'center' }}>
+            没有账号？
+            <span
+              style={{ color: '#1890ff', cursor: 'pointer' }}
+              onClick={() => setActiveKey('register')}
+            >
+              去注册
+            </span>
+          </div>
+        </Form>
+      ),
+    },
+    {
+      key: 'register',
+      label: '注册',
+      children: (
+        <Form layout="vertical" onFinish={handleRegister} form={registerForm}>
+          <Form.Item
+            label="密码"
+            name="password"
+            rules={[{ required: true, message: '请输入密码' }]}
+            hasFeedback
+          >
+            <Input.Password />
+          </Form.Item>
+          <Form.Item
+            label="密码确认"
+            name="password"
+            rules={[
+              { required: true, message: '请确认密码' },
+              ({ getFieldValue }) => ({
+                validator: validatePassword,
+              }),
+            ]}
+            dependencies={['password']}
+            hasFeedback
+          >
+            <Input.Password />
+          </Form.Item>
+          <Form.Item
+            label="邮箱"
+            name="email"
+            rules={[
+              { required: true, message: '请输入邮箱' },
+              {
+                type: 'email',
+                message: '请输入有效的邮箱地址！',
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="邮箱验证码"
+            name="verificationCode"
+            rules={[{ required: true, message: '请输入验证码' }]}
+          >
+            <Input
+              suffix={
+                <div
+                  style={{
+                    color: codeStatus ? '#999' : '#1890ff',
+                    cursor: 'pointer',
+                    fontSize: 13,
+                  }}
+                  onClick={getCode}
+                >
+                  {codeStatus ? `${count}s` : '发送验证码'}
+                </div>
+              }
+            />
+          </Form.Item>
+
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{ width: '100%', marginTop: 30 }}
+            >
+              注册
+            </Button>
+          </Form.Item>
+        </Form>
+      ),
+    },
+  ]
+
   return (
     <Modal
       width={360}
@@ -101,127 +219,13 @@ export default function LoginModal({ open, setOpen }: any) {
       footer={null}
     >
       <Tabs
-        // defaultActiveKey="login"
+        items={tabItems}
         activeKey={activeKey}
         centered
         onChange={(key) => {
           setActiveKey(key)
-          console.log('🚀 ~ file: index.tsx:39 ~ LoginModal ~ key:', key)
         }}
-      >
-        <Tabs.TabPane tab="登录" key="login">
-          <Form layout="vertical" onFinish={handleLogin} form={form}>
-            <Form.Item
-              label="邮箱"
-              name="email"
-              rules={[
-                { required: true, message: '请输入邮箱' },
-                {
-                  type: 'email',
-                  message: '请输入有效的邮箱地址！',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              label="密码"
-              name="password"
-              rules={[{ required: true, message: '请输入密码' }]}
-            >
-              <Input.Password />
-            </Form.Item>
-
-            <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                style={{ width: '100%', marginTop: 30 }}
-              >
-                登录
-              </Button>
-            </Form.Item>
-            <div style={{ textAlign: 'center' }}>
-              没有账号？
-              <span
-                style={{ color: '#1890ff', cursor: 'pointer' }}
-                onClick={() => setActiveKey('register')}
-              >
-                去注册
-              </span>
-            </div>
-          </Form>
-        </Tabs.TabPane>
-        <Tabs.TabPane tab="注册" key="register">
-          <Form layout="vertical" onFinish={handleRegister} form={registerForm}>
-            <Form.Item
-              label="密码"
-              name="password"
-              rules={[{ required: true, message: '请输入密码' }]}
-              hasFeedback
-            >
-              <Input.Password />
-            </Form.Item>
-            <Form.Item
-              label="密码确认"
-              name="password"
-              rules={[
-                { required: true, message: '请确认密码' },
-                ({ getFieldValue }) => ({
-                  validator: validatePassword,
-                }),
-              ]}
-              dependencies={['password']}
-              hasFeedback
-            >
-              <Input.Password />
-            </Form.Item>
-            <Form.Item
-              label="邮箱"
-              name="email"
-              rules={[
-                { required: true, message: '请输入邮箱' },
-                {
-                  type: 'email',
-                  message: '请输入有效的邮箱地址！',
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              label="邮箱验证码"
-              name="verificationCode"
-              rules={[{ required: true, message: '请输入验证码' }]}
-            >
-              <Input
-                suffix={
-                  <div
-                    style={{
-                      color: codeStatus ? '#999' : '#1890ff',
-                      cursor: 'pointer',
-                      fontSize: 13,
-                    }}
-                    onClick={getCode}
-                  >
-                    {codeStatus ? `${count}s` : '发送验证码'}
-                  </div>
-                }
-              />
-            </Form.Item>
-
-            <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                style={{ width: '100%', marginTop: 30 }}
-              >
-                注册
-              </Button>
-            </Form.Item>
-          </Form>
-        </Tabs.TabPane>
-      </Tabs>
+      />
     </Modal>
   )
 }
