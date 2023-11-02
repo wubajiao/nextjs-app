@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion :
+ * @Author       : wuhaidong
+ * @Date         : 2023-09-27 10:13:32
+ * @LastEditors  : wuhaidong
+ * @LastEditTime : 2023-10-31 22:49:48
+-->
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -5,13 +13,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First, run the development server:
 
 ```bash
-npm run dev
-# or
+##安装
+yarn
+
+## 运行
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
