@@ -4,15 +4,15 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  margin: 0 20px;
+  margin: 0 12px;
   .total {
     display: flex;
     justify-content: space-between;
     padding: 40px 80px;
     .card {
       background-color: #1b1c1e;
-      width: 240px;
-      height: 110px;
+      width: 180px;
+      height: 111px;
       padding: 16px 24px;
       z-index: 1000;
       .label {
@@ -32,7 +32,7 @@
   .riseFall {
     display: flex;
     justify-content: space-between;
-    padding: 40px 80px;
+    padding: 42px 80px;
     .card {
       background-color: #1b1c1e;
       width: 160px;
@@ -57,10 +57,10 @@
   .dealVolume {
     display: flex;
     justify-content: space-between;
-    padding: 40px 80px;
+    padding: 40px 60px;
     .card {
       background-color: #1b1c1e;
-      width: 160px;
+      width: 200px;
       padding: 16px 24px;
       z-index: 1000;
       text-align: center;
@@ -73,13 +73,26 @@
         color: #fff;
       }
     }
+    &.marketFlow {
+      .up {
+        color: $up-color;
+      }
+      .down {
+        color: $down-color;
+      }
+    }
   }
 
-  .chart {
-    display: flex;
+  .fundDirection {
     width: 100%;
-    flex: 1;
-    // padding: 0;
-    // margin-bottom: 12px;
+    display: flex;
+    padding: 22px 0;
+    .item {
+      width: 100%;
+      text-align: center;
+      .top {
+        margin-bottom: 8px;
+      }
+    }
   }
 }
