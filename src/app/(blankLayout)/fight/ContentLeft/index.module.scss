@@ -1,18 +1,18 @@
 @import '../../_available.scss';
 
 .contentLeft {
-  width: 420px;
+  width: 440px;
   display: flex;
   flex-direction: column;
   .boxTop {
     .tbody {
-      height: 272px;
+      height: 282px;
       overflow-y: scroll;
     }
   }
   .boxBottom {
     .tbody {
-      height: 432px;
+      height: 442px;
       overflow-y: scroll;
     }
   }

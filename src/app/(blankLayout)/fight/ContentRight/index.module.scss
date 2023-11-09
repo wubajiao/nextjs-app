@@ -1,7 +1,7 @@
 @import '../../_available.scss';
 
 .contentRight {
-  width: 420px;
+  width: 440px;
   display: flex;
   flex-direction: column;
 
@@ -36,37 +36,21 @@
 
   .newsWrap {
     .news {
-      height: 470px;
+      height: 480px;
       overflow-y: scroll;
 
       .newItem {
-        display: flex;
-        margin-bottom: 12px;
-        .left {
-          color: #ccc;
-          margin-right: 16px;
+        margin-bottom: 18px;
+        font-size: 15px;
+        .time {
+          margin-bottom: 4px;
+          color: $up-color;
         }
-        .right {
-          .title {
-            font-size: 14px;
-            color: #fff;
-            font-weight: 600;
-          }
-          .content {
-            // 设置三行省略号
-            overflow: hidden;
-            max-height: initial;
-            // Webkit solution for multiline ellipsis
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 3;
-            // Solution for Opera
-            text-overflow: -o-ellipsis-lastline;
-
-            font-size: 14px;
-            color: #ccc;
-            font-weight: 400;
-          }
+        .title {
+          font-weight: 500;
+        }
+        .content {
+          color: #ccc;
         }
       }
     }
