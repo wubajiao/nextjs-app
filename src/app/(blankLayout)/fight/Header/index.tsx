@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 17:44:05
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-11-01 22:40:53
+ * @LastEditTime : 2023-11-08 14:59:46
  */
 'use client'
 import React, { useState, useEffect } from 'react'
@@ -159,7 +159,7 @@ export default function Header() {
     setWeekday(weekDayText)
   }
 
-  // 获取
+  // 获取实时指数数据
   const getRealtime = () => {
     request
       .get(
@@ -174,6 +174,7 @@ export default function Header() {
         console.error(error)
       })
   }
+
   return (
     <div className={styles.header}>
       <div className={styles.left}>

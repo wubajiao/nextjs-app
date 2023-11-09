@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 14:59:23
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-10-30 14:29:54
+ * @LastEditTime : 2023-11-03 11:14:54
  */
 'use client'
 import React, { useState } from 'react'
@@ -13,7 +13,6 @@ import LoginModal from '@/components/LoginModal'
 import styles from './index.module.scss'
 export default function Header() {
   const [modalOpen, setModalOpen] = useState<boolean>(false)
-  console.log('🚀 ~ file: index.tsx:16 ~ Header ~ modalOpen:', modalOpen)
   return (
     <div className={`${styles.header}`}>
       <div className={styles.navWrap}>
@@ -27,10 +26,15 @@ export default function Header() {
             {[
               { name: '首页', link: '/home' },
               { name: '韭菜导航', link: '/hao' },
-              { name: '老九作战中心', link: '/fight' },
+              { name: '老九作战中心', link: '/fight', target: '_blank' },
             ].map((item) => {
               return (
-                <Link key={item.link} href={item.link} legacyBehavior>
+                <Link
+                  key={item.link}
+                  href={item.link}
+                  // legacyBehavior
+                  target={item.target ? item.target : '_self'}
+                >
                   <div className={styles.item}>{item.name}</div>
                 </Link>
               )
