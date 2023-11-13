@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 17:44:05
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-11-08 14:59:46
+ * @LastEditTime : 2023-11-09 22:30:43
  */
 'use client'
 import React, { useState, useEffect } from 'react'
@@ -12,107 +12,44 @@ import request from '@/utils/request'
 import styles from './index.module.scss'
 const example = [
   {
-    symbol: 'SZ399001',
-    current: 9863.8,
-    percent: -0.65,
-    chg: -64.19,
-    timestamp: 1698735864000,
-    volume: 45425317677,
-    amount: 532043957570,
-    market_capital: 31399821792788,
-    float_market_capital: 10718549912440.8,
-    turnover_rate: 2.02,
-    amplitude: 1.13,
-    open: 9924.72,
-    last_close: 9927.99,
-    high: 9927.45,
-    low: 9814.98,
-    avg_price: 9863.8,
-    trade_volume: null,
-    side: null,
-    is_trade: false,
-    level: 3,
-    trade_session: null,
-    trade_type: null,
-    current_year_percent: -10.46,
-    trade_unique_id: null,
-    type: 12,
-    bid_appl_seq_num: null,
-    offer_appl_seq_num: null,
-    volume_ext: null,
-    traded_amount_ext: null,
-    trade_type_v2: null,
-    yield_to_maturity: null,
+    f1: 2,
+    f2: 3053.28,
+    f3: 0.03,
+    f4: 0.91,
+    f6: 388556747091.5,
+    f12: '000001',
+    f13: 1,
+    f104: 702,
+    f105: 1489,
+    f106: 102,
   },
   {
-    symbol: 'SH000001',
-    current: 3018.77,
-    percent: -0.09,
-    chg: -2.78,
-    timestamp: 1698735600000,
-    volume: 31985996700,
-    amount: 386277226427.2,
-    market_capital: 46803360556178.23,
-    float_market_capital: 25239885076364.88,
-    turnover_rate: 0.74,
-    amplitude: 0.54,
-    open: 3019.65,
-    last_close: 3021.55,
-    high: 3023,
-    low: 3006.61,
-    avg_price: 3018.77,
-    trade_volume: null,
-    side: null,
-    is_trade: false,
-    level: 3,
-    trade_session: null,
-    trade_type: null,
-    current_year_percent: -2.28,
-    trade_unique_id: null,
-    type: 12,
-    bid_appl_seq_num: null,
-    offer_appl_seq_num: null,
-    volume_ext: null,
-    traded_amount_ext: null,
-    trade_type_v2: null,
-    yield_to_maturity: null,
+    f1: 2,
+    f2: 10032.09,
+    f3: -0.2,
+    f4: -20,
+    f6: 573888744682.0614,
+    f12: '399001',
+    f13: 0,
+    f104: 690,
+    f105: 2069,
+    f106: 107,
   },
   {
-    symbol: 'SZ395004',
-    current: 0,
-    percent: 0,
-    chg: 0,
-    timestamp: 1698735870000,
-    volume: 15886551014,
-    amount: 244733927546,
-    market_capital: null,
-    float_market_capital: null,
-    turnover_rate: null,
-    amplitude: null,
-    open: null,
-    last_close: 0,
-    high: null,
-    low: null,
-    avg_price: 0,
-    trade_volume: 0,
-    side: 0,
-    is_trade: false,
-    level: 1,
-    trade_session: null,
-    trade_type: null,
-    current_year_percent: 0,
-    trade_unique_id: '15886551014',
-    type: 12,
-    bid_appl_seq_num: null,
-    offer_appl_seq_num: null,
-    volume_ext: null,
-    traded_amount_ext: null,
-    trade_type_v2: null,
-    yield_to_maturity: null,
+    f1: 2,
+    f2: 2018.38,
+    f3: -0.23,
+    f4: -4.75,
+    f6: 278698584196.97,
+    f12: '399006',
+    f13: 0,
+    f104: 306,
+    f105: 994,
+    f106: 25,
   },
 ]
 
-const STOCKS = ['SH000001', 'SZ399001', 'SZ399006']
+const STOCKS = ['000001', '399001', '399006']
 
 export default function Header() {
   const [list, setList] = useState<any>([])
@@ -162,13 +99,12 @@ export default function Header() {
   // 获取实时指数数据
   const getRealtime = () => {
     request
-      .get(
-        `/allStock/realtime?symbol=${STOCKS[0]},${STOCKS[1]},${STOCKS[2]}`,
-        {}
-      )
+      .get(`/allStock/indexRealtime`, {})
       .then((response) => {
-        const { data } = response
-        setList(data)
+        const {
+          data: { diff },
+        } = response
+        setList(diff)
       })
       .catch((error) => {
         console.error(error)
@@ -185,7 +121,7 @@ export default function Header() {
         <div className={styles.list}>
           {list.map((item: any) => {
             let name = ''
-            switch (item.symbol) {
+            switch (item.f12) {
               case `${STOCKS[0]}`:
                 name = '上证指数'
                 break
@@ -201,14 +137,17 @@ export default function Header() {
                 <div className={styles.label}>{name}</div>
                 <div
                   className={`${styles.total} ${
-                    item.percent > 0 ? styles.up : styles.down
+                    item.f3 > 0 ? styles.up : styles.down
                   }`}
                 >
-                  {item.current}
+                  {item.f2}
                 </div>
-                <div className={item.percent > 0 ? styles.up : styles.down}>
-                  <span className={styles.range}>{item.chg}</span>
-                  <span className={styles.percent}>({item.percent}%)</span>
+                <div className={item.f3 > 0 ? styles.up : styles.down}>
+                  <span className={styles.range}>
+                    {item.f3 > 0 && '+'}
+                    {item.f4}
+                  </span>
+                  <span className={styles.percent}>({item.f3}%)</span>
                 </div>
               </div>
             )

@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 17:44:05
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-11-09 16:08:48
+ * @LastEditTime : 2023-11-09 22:35:42
  */
 'use client'
 import React, { useEffect, useState } from 'react'
@@ -138,7 +138,9 @@ export default function ContentCenter() {
         let total = 0
         for (let i = 0; i < items.length; i++) {
           newList.push(items[i].quote)
-          total = total + items[i].quote.amount
+          if (i < 2) {
+            total = total + items[i].quote.amount
+          }
         }
 
         newList.unshift({ name: '总交易额', amount: total })

@@ -6,6 +6,7 @@
   padding: 12px;
   background-color: #1b1c1e;
   color: #fff;
+  overflow: hidden;
   .content {
     @include scrollbar();
     display: flex;
