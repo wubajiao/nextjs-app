@@ -1,0 +1,56 @@
+.about {
+  .banner {
+    width: 100%;
+    min-width: 1200px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    background-image: url(../assets/images/bannerbg.webp);
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-color: #d6e4ff;
+    .title {
+      width: 1200px;
+      margin: 0 auto;
+      span {
+        font-size: 30px;
+      }
+    }
+  }
+  .contentwrap {
+    width: 100%;
+    background-color: #fff;
+    .content {
+      padding-top: 30px;
+      margin: 0 auto;
+      width: 1200px;
+      .title {
+        font-size: 24px;
+        text-align: center;
+        margin: 30px 0 60px 0;
+      }
+      .introduce {
+        display: flex;
+        justify-content: space-between;
+        .left,
+        .right {
+          width: 46%;
+          p {
+            margin-bottom: 20px;
+            text-indent: 2em;
+          }
+        }
+      }
+      .contact {
+        display: flex;
+        justify-content: space-around;
+        margin: 50px 0 100px 0;
+        .item {
+          display: flex;
+          margin-right: 120px;
+        }
+      }
+    }
+  }
+}
