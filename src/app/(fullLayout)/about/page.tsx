@@ -68,7 +68,7 @@ function about() {
               </p>
             </div>
             <div className={styles.right}>
-              <Image src={aboutImg} alt="" width={460} />
+              <Image src={aboutImg} alt="" className={styles.img} />
             </div>
           </div>
           <div className={styles.title}>联系我们</div>

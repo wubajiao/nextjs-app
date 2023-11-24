@@ -35,10 +35,14 @@
         justify-content: space-between;
         .left,
         .right {
-          width: 46%;
+          width: 44%;
           p {
+            margin-top: 20px;
             margin-bottom: 20px;
             text-indent: 2em;
+          }
+          .img {
+            width: 100%;
           }
         }
       }
@@ -48,7 +52,7 @@
         margin: 50px 0 100px 0;
         .item {
           display: flex;
-          margin-right: 120px;
+          margin-left: 60px;
         }
       }
     }

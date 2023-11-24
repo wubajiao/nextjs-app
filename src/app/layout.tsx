@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 10:13:32
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-10-11 15:31:43
+ * @LastEditTime : 2023-11-24 11:25:41
  */
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -16,8 +16,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'leeks App',
-  description: '久财智数，韭菜科技',
+  title: '久财科技',
+  description: '久财科技，金融数据服务平台',
 }
 
 export default function RootLayout({
