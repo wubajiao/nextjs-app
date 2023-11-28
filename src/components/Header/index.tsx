@@ -3,24 +3,49 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 14:59:23
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-11-24 11:05:10
+ * @LastEditTime : 2023-11-28 23:04:51
  */
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import LoginModal from '@/components/LoginModal'
 import styles from './index.module.scss'
 export default function Header() {
   const [modalOpen, setModalOpen] = useState<boolean>(false)
+  const [scroll, setScroll] = useState<boolean>(false)
+  const [scrollHeight, setScrollHeight] = useState<number>(0)
+
   const pathname = usePathname()
 
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (scrollHeight > 40) {
+      setScroll(true)
+    } else {
+      setScroll(false)
+    }
+  }, [scrollHeight])
+
+  const handleScroll = () => {
+    const height = window.scrollY
+    setScrollHeight(height)
+  }
+
   return (
-    <div className={`${styles.header}`}>
+    <div className={`${styles.header} ${scroll && styles.scroll}`}>
       <div className={styles.navWrap}>
         <div className={styles.left}>
-          <Link href="/">
-            <div className={`${styles.logo}`}>leeks</div>
+          <Link href="/" className={styles.wrap}>
+            <i className={`leeks leeks-leek ${styles.logo}`} />
+            <div className={`${styles.name}`}>久财</div>
           </Link>
         </div>
         <div className={styles.right}>

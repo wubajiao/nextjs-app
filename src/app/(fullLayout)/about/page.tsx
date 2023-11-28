@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 12:01:56
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-11-22 22:44:51
+ * @LastEditTime : 2023-11-28 23:10:41
  */
 'use client'
 import React from 'react'
@@ -46,12 +46,11 @@ function about() {
     <div className={styles.about}>
       <div className={styles.banner}>
         <div className={styles.title}>
-          <span>关于久财</span>
+          <div className={styles.bold}>公司介绍</div>
         </div>
       </div>
       <div className={styles.contentwrap}>
         <div className={styles.content}>
-          <div className={styles.title}>公司介绍</div>
           <div className={styles.introduce}>
             <div className={styles.left}>
               <p>

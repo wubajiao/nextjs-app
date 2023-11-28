@@ -1,7 +1,14 @@
 .header {
   width: 100%;
   padding: 12px 0;
-  background-color: #070b20;
+  background-color: rgba(7, 11, 32, 0);
+  position: fixed;
+  top: 0;
+  left: 0;
+  &.scroll {
+    padding: 0;
+    background-color: rgba(7, 11, 32, 1);
+  }
 
   .navWrap {
     width: 100%;
@@ -10,37 +17,46 @@
     display: flex;
     justify-content: space-between;
     .left {
-      .logo {
-        font-size: 28px;
-        color: #fff;
+      .wrap {
+        display: flex;
+        align-items: center;
+        .logo {
+          font-size: 42px;
+          color: #1afa29;
+          margin-right: 12px;
+        }
+        .name {
+          font-size: 26px;
+          color: #fff;
+        }
       }
     }
     .right {
-        display: flex;
-        align-items: center;
+      display: flex;
+      align-items: center;
       .nav {
         display: flex;
         .item {
-          color: #999;
+          color: #c0c6c9;
           margin-right: 36px;
           cursor: pointer;
-          &.active,&:hover {
+          &.active,
+          &:hover {
             color: #fff;
           }
-          
         }
       }
-      .login{
+      .login {
         height: 18px;
         line-height: 18px;
-        color:#999;
+        color: #c0c6c9;
         font-size: 16px;
-        border-left: 1px solid #999;
-        padding-left:36px;
+        border-left: 1px solid #c0c6c9;
+        padding-left: 36px;
         cursor: pointer;
         &:hover {
-            color: #fff;
-          }
+          color: #fff;
+        }
       }
     }
   }

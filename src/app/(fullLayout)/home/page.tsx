@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 12:01:56
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-11-22 17:03:51
+ * @LastEditTime : 2023-11-24 12:03:16
  */
 
 'use client'
@@ -18,7 +18,7 @@ function home() {
       <div className={styles.banner}>
         <div className={styles.content}>
           <div className={styles.left}>
-            <div className={styles.slogon}>要久财，勿韭菜</div>
+            <div className={`${styles.slogon}`}>要久财，勿韭菜</div>
             <div className={styles.tags}>
               专业、实时、准确、全面的金融数据服务平台
             </div>

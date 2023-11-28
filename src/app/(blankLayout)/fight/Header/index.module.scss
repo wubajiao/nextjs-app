@@ -11,7 +11,7 @@
     align-items: center;
     .logo {
       font-size: 36px;
-      color: #1afa29;
+      color: $up-color; // #1afa29;
       margin-right: 16px;
     }
     .title {

@@ -2,19 +2,22 @@
   .banner {
     width: 100%;
     min-width: 1200px;
-    height: 180px;
+    height: 260px;
     display: flex;
     align-items: center;
     background-image: url(../assets/images/bannerbg.webp);
     background-position: center;
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    background-color: #d6e4ff;
+    background-color: #2f54eb;
     .title {
       width: 1200px;
       margin: 0 auto;
-      span {
-        font-size: 30px;
+      text-align: center;
+      .bold {
+        margin-top: 120px;
+        font-size: 24px;
+        color: #fff;
       }
     }
   }

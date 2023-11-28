@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 10:13:32
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-11-24 11:25:41
+ * @LastEditTime : 2023-11-24 11:41:12
  */
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -32,6 +32,10 @@ export default function RootLayout({
         <link
           href="//at.alicdn.com/t/c/font_4271386_ccfzxxlom8e.css"
           rel="stylesheet"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         />
       </head>
       <body className={inter.className}>
