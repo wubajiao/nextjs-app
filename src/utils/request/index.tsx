@@ -3,12 +3,12 @@
  * @Author       : wuhaidong
  * @Date         : 2023-10-12 11:30:09
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-12-05 18:09:18
+ * @LastEditTime : 2023-12-06 17:49:32
  */
 import axios from 'axios'
 import { message } from 'antd'
-
-let baseURL = '' // 你的API基本URL
+console.log('NODE_ENV', process.env.NODE_ENV)
+let baseURL = '' // API基本URL
 if (process.env.NODE_ENV === 'development') {
   // 在开发环境下执行的代码
   baseURL = 'http://www.localhost:4000/api'
