@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-10-12 11:30:09
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-12-06 17:49:32
+ * @LastEditTime : 2023-12-06 23:13:29
  */
 import axios from 'axios'
 import { message } from 'antd'
@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'development') {
   baseURL = 'http://www.localhost:4000/api'
 } else if (process.env.NODE_ENV === 'production') {
   // 在生产环境下执行的代码
-  baseURL = 'http://192.168.110.101:4000/api'
+  baseURL = 'http://dev-api.leeks.cn/api'
 }
 
 // 创建一个独立的Axios实例
