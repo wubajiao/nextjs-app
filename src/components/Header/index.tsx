@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 14:59:23
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-11-29 14:28:59
+ * @LastEditTime : 2023-12-15 14:13:38
  */
 'use client'
 import React, { useState, useEffect } from 'react'
@@ -52,10 +52,10 @@ export default function Header() {
           <div className={styles.nav}>
             {[
               { name: '首页', link: '/' },
-              { name: '金韭导航', link: '/hao' },
-              { name: '老韭作战中心', link: '/fight', target: '_blank' },
+              // { name: '金韭导航', link: '/hao' },
+              // { name: '老韭作战中心', link: '/fight', target: '_blank' },
               { name: '关于', link: '/about' },
-            ].map((item) => {
+            ].map((item: any) => {
               return (
                 <Link
                   key={item.link}
@@ -74,9 +74,9 @@ export default function Header() {
               )
             })}
           </div>
-          <div className={styles.login} onClick={() => setModalOpen(true)}>
+          {/* <div className={styles.login} onClick={() => setModalOpen(true)}>
             登录
-          </div>
+          </div> */}
         </div>
       </div>
       <LoginModal

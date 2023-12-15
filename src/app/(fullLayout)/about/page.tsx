@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 12:01:56
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-12-04 16:45:31
+ * @LastEditTime : 2023-12-15 14:15:04
  */
 'use client'
 import React from 'react'
@@ -18,18 +18,18 @@ const contacts = [
   {
     label: '帮助&反馈',
     value: '去反馈',
-    src: 'https://support.qq.com/products/614357',
+    src: null, // 'https://support.qq.com/products/614357',
     icon: contactImg1,
   },
   {
     label: '客服微信',
-    value: 'leeks.com',
+    value: 'leeks.cn',
     src: null,
     icon: contactImg2,
   },
   {
     label: '客服邮箱',
-    value: 'help@leeks.com',
+    value: 'help@leeks.cn',
     src: null,
     icon: contactImg2,
   },
@@ -68,8 +68,8 @@ function about() {
             </div>
             <div className={styles.right}>
               <Image src={aboutImg} alt="" className={styles.img} />
-            </div>    
-          </div>  
+            </div>
+          </div>
           <div className={styles.title}>联系我们</div>
           <div className={styles.contact}>
             {contacts.map((item) => {
