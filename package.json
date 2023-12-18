@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "prod": "next build && next start",
+    "pm2:prod": "pm2 start --name leeks-pc  yarn -- start --watch",
     "export": "next export",
     "lint": "next lint"
   },
