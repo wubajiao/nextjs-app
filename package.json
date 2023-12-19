@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "prod": "next build && next start",
-    "pm2:prod": "pm2 start ./pm2Server.js --watch --name=leeks-pc --watch",
+    "pm2:prod": "pm2 start ./pm2Server.js --watch --name=leeks-pc-web --watch",
     "export": "next export",
     "lint": "next lint"
   },
