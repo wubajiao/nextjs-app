@@ -3,13 +3,14 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 10:13:32
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-11-24 11:41:12
+ * @LastEditTime : 2023-12-21 15:30:00
  */
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import StyledComponentsRegistry from '../lib/AntdRegistry'
 import { ConfigProvider } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
+import BaiDuAnalytics from './BaiDuAnalytics'
 
 import './globals.css'
 
@@ -17,7 +18,17 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: '久财科技',
-  description: '久财科技，金融数据服务平台',
+  description: '久财科技，专业、实时、准确、全面的金融数据服务平台',
+  keywords: [
+    '久财科技',
+    '深圳市久财科技有限公司',
+    '深圳市久财科技',
+    '炒股大屏',
+    '炒股大屏监控',
+    '金融数据平台',
+    '股票数据',
+    '股票接口',
+  ],
 }
 
 export default function RootLayout({
@@ -40,6 +51,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <StyledComponentsRegistry>
+          <BaiDuAnalytics />
           <ConfigProvider
             locale={zhCN}
             theme={{
