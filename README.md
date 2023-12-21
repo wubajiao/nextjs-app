@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 10:13:32
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-10-31 22:49:48
+ * @LastEditTime : 2023-12-21 16:58:57
 -->
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
@@ -18,6 +18,14 @@ yarn
 
 ## 运行
 yarn dev
+
+#部署
+yarn build
+yarn start
+
+## pm2 部署
+yarn build
+yarn pm2:prod
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
