@@ -20,11 +20,12 @@
     "dayjs": "^1.11.10",
     "echarts": "^5.4.3",
     "lodash": "^4.17.21",
-    "next": "^13.5.3",
+    "next": "^14.0.4",
     "node-cmd": "^5.0.0",
     "number-precision": "^1.6.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "sharp": "^0.33.1"
   },
   "devDependencies": {
     "@nextui-org/react": "^2.1.13",
@@ -33,7 +34,7 @@
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.16",
     "eslint": "8.50.0",
-    "eslint-config-next": "^13.5.3",
+    "eslint-config-next": "^14.0.4",
     "framer-motion": "^10.16.4",
     "postcss": "8.4.30",
     "sass": "^1.68.0",
