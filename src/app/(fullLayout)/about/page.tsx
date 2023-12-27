@@ -35,7 +35,7 @@ const contacts = [
   },
   {
     label: '公司地址',
-    value: '去地图查看',
+    value: '深圳市南山区西丽街道阳光社区阳光二路新健兴工业区6栋210', // 去地图查看
     src: 'https://map.baidu.com/poi/%E8%A5%BF%E4%B8%BD%E9%98%B3%E5%85%89%E5%B7%A5%E4%B8%9A%E5%8C%BA-%E6%96%B0%E5%81%A5%E5%85%B4%E5%B7%A5%E4%B8%9A%E5%9B%AD/@12684143.625,2571976.77,19z?uid=e6de8feb2d782820ca09f0ea&ugc_type=3&ugc_ver=1&device_ratio=1&compat=1&pcevaname=pc4.1&querytype=detailConInfo&da_src=shareurl',
     icon: contactImg3,
   },
