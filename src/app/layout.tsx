@@ -3,15 +3,13 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 10:13:32
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-12-22 15:59:32
+ * @LastEditTime : 2023-12-27 22:44:17
  */
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import StyledComponentsRegistry from '../lib/AntdRegistry'
 import { ConfigProvider } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
-// import BaiDuAnalytics from './BaiDuAnalytics.js'
-import Script from 'next/script'
 
 import './globals.css'
 
@@ -49,7 +47,20 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         />
-        <Script src="./BaiDuAnalytics.js" />
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            var _hmt = _hmt || [];
+            (function () {
+              var hm = document.createElement("script");
+              hm.src = "https://hm.baidu.com/hm.js?89261032393e59fdc3edd28d46a88756";
+              var s = document.getElementsByTagName("script")[0];
+              s.parentNode.insertBefore(hm, s);
+            })();
+              `,
+          }}
+        />
       </head>
       <body className={inter.className}>
         <StyledComponentsRegistry>

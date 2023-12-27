@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 14:59:23
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-12-15 14:13:38
+ * @LastEditTime : 2023-12-27 22:22:24
  */
 'use client'
 import React, { useState, useEffect } from 'react'
@@ -54,7 +54,7 @@ export default function Header() {
               { name: '首页', link: '/' },
               // { name: '金韭导航', link: '/hao' },
               // { name: '老韭作战中心', link: '/fight', target: '_blank' },
-              { name: '关于', link: '/about' },
+              { name: '关于公司', link: '/about' },
             ].map((item: any) => {
               return (
                 <Link
