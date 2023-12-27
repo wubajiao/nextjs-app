@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 12:01:56
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-12-15 14:15:04
+ * @LastEditTime : 2023-12-27 22:04:04
  */
 'use client'
 import React from 'react'
@@ -16,17 +16,17 @@ import contactImg3 from '../assets/images/contact3.png'
 
 const contacts = [
   {
-    label: '帮助&反馈',
-    value: '去反馈',
+    label: '联系电话', // '帮助&反馈',
+    value: '17688562626',
     src: null, // 'https://support.qq.com/products/614357',
-    icon: contactImg1,
+    icon: contactImg2, // contactImg1,
   },
-  {
-    label: '客服微信',
-    value: 'leeks.cn',
-    src: null,
-    icon: contactImg2,
-  },
+  // {
+  //   label: '客服微信',
+  //   value: 'leeks.cn',
+  //   src: null,
+  //   icon: contactImg2,
+  // },
   {
     label: '客服邮箱',
     value: 'help@leeks.cn',
@@ -56,9 +56,9 @@ function about() {
               <p>
                 久财科技是一家专注于提供金融数据服务和数据分析的DaaS（数据即服务）型公司，致力于为用户提供专业、实时、准确、全面的数据解决方案，我们的使命是通过数据驱动和智能分析，帮助投资者做出明智的决策，实现投资长盈。
               </p>
-              <p>
+              {/* <p>
                 作为一家创新的金融科技公司，我们拥有一支高素质的团队，由数据专家、金融专家和技术工程师组成。我们深入了解金融市场的需求，并通过先进的技术和分析方法，提供高质量、准确可靠的数据服务。
-              </p>
+              </p> */}
               <p>
                 我们的数据服务涵盖多个领域，包括市场数据、交易数据、风险数据、财经数据等。我们与各大金融机构和数据供应商建立了战略合作伙伴关系，获取多样化的数据源，并通过我们的平台和API接口向客户提供实时、全面的数据支持。
               </p>
