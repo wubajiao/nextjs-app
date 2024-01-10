@@ -5,7 +5,6 @@
  * @LastEditors  : wuhaidong
  * @LastEditTime : 2023-11-23 22:50:19
  */
-'use client'
 import Home from './home/page'
 
 export default function Index() {

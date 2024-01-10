@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 10:13:32
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-12-27 22:44:17
+ * @LastEditTime : 2024-01-10 21:34:32
  */
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -24,6 +24,8 @@ export const metadata: Metadata = {
     '深圳市久财科技',
     '炒股大屏',
     '炒股大屏监控',
+    '炒股监控大屏',
+    '多屏合一',
     '金融数据平台',
     '股票数据',
     '股票接口',
@@ -47,10 +49,11 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         />
-
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+        {/* 生产环境再引入百度统计 */}
+        {process.env.NODE_ENV === 'production' && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
             var _hmt = _hmt || [];
             (function () {
               var hm = document.createElement("script");
@@ -59,8 +62,9 @@ export default function RootLayout({
               s.parentNode.insertBefore(hm, s);
             })();
               `,
-          }}
-        />
+            }}
+          />
+        )}
       </head>
       <body className={inter.className}>
         <StyledComponentsRegistry>

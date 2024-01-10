@@ -3,9 +3,9 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 12:01:56
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2024-01-06 23:22:48
+ * @LastEditTime : 2024-01-10 22:04:35
  */
-'use client'
+import type { Metadata } from 'next'
 import React from 'react'
 import Image from 'next/image'
 import styles from './index.module.scss'
@@ -40,6 +40,18 @@ const contacts = [
     icon: contactImg3,
   },
 ]
+
+export const metadata: Metadata = {
+  title: '关于久财',
+  description: '久财科技-关于公司',
+  keywords: [
+    '关于久财科技',
+    '深圳市久财科技介绍',
+    '久财科技公司业务介绍',
+    '久财科技公司产品介绍',
+    '炒股大屏介绍',
+  ],
+}
 
 function about() {
   return (
