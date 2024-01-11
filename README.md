@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 10:13:32
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2024-01-06 22:03:31
+ * @LastEditTime : 2024-01-06 23:39:57
 -->
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
@@ -26,6 +26,9 @@ npm run start
 ## pm2 部署
 npm run build
 npm run pm2:prod
+
+## pm2重启项目
+pm2 restart leeks-pc-web --watch
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

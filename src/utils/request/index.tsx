@@ -3,19 +3,11 @@
  * @Author       : wuhaidong
  * @Date         : 2023-10-12 11:30:09
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-12-21 09:17:48
+ * @LastEditTime : 2024-01-11 11:52:36
  */
 import axios from 'axios'
 import { message } from 'antd'
-console.log('NODE_ENV', process.env.NODE_ENV)
-let baseURL = '' // API基本URL
-if (process.env.NODE_ENV === 'development') {
-  // 在开发环境下执行的代码
-  baseURL = 'http://www.localhost:4000/api'
-} else if (process.env.NODE_ENV === 'production') {
-  // 在生产环境下执行的代码
-  baseURL = 'http://leeks.cn/api'
-}
+const baseURL = `${process.env.API_BASE_URL}/api`
 
 // 创建一个独立的Axios实例
 const instance = axios.create({
