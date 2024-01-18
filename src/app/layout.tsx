@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 10:13:32
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2024-01-10 21:34:32
+ * @LastEditTime : 2024-01-18 11:15:23
  */
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -49,6 +49,13 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         />
+        {/* 360站长工具验证 */}
+        {process.env.NODE_ENV === 'production' && (
+          <meta
+            name="360-site-verification"
+            content="ea34b5a7ea3fee4c7852c47dc329b391"
+          />
+        )}
         {/* 生产环境再引入百度统计 */}
         {process.env.NODE_ENV === 'production' && (
           <script
