@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 10:13:32
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2024-01-18 11:15:23
+ * @LastEditTime : 2024-01-18 12:04:44
  */
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -55,6 +55,10 @@ export default function RootLayout({
             name="360-site-verification"
             content="ea34b5a7ea3fee4c7852c47dc329b391"
           />
+        )}
+        {/* 搜狗搜索站长工具验证 */}
+        {process.env.NODE_ENV === 'production' && (
+          <meta name="sogou_site_verification" content="wumIDo1MEg" />
         )}
         {/* 生产环境再引入百度统计 */}
         {process.env.NODE_ENV === 'production' && (
