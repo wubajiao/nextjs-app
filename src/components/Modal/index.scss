@@ -1,0 +1,21 @@
+.leeks-modal {
+  .ant-spin-nested-loading .ant-spin {
+    min-height: calc(400px - 40px);
+    max-height: calc(100vh - 220px);
+  }
+  .leeks-modal-body {
+    height: 600px;
+    .ant-modal-body {
+      .ant-spin-nested-loading {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        .ant-spin-container {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+      }
+    }
+  }
+}
