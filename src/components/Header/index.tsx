@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 14:59:23
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-12-27 22:22:24
+ * @LastEditTime : 2024-01-10 22:19:21
  */
 'use client'
 import React, { useState, useEffect } from 'react'
@@ -74,9 +74,9 @@ export default function Header() {
               )
             })}
           </div>
-          {/* <div className={styles.login} onClick={() => setModalOpen(true)}>
+          <div className={styles.login} onClick={() => setModalOpen(true)}>
             登录
-          </div> */}
+          </div>
         </div>
       </div>
       <LoginModal

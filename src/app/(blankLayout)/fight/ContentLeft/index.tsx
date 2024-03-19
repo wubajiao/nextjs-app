@@ -3,22 +3,23 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 17:44:05
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-10-19 23:11:32
+ * @LastEditTime : 2024-03-18 17:59:43
  */
 'use client'
 import React, { useState, useEffect } from 'react'
-import { message } from 'antd'
+import { message, Form } from 'antd'
+import FormModal from '@/components/FormModal'
 import { useInterval } from 'ahooks'
 import styles from './index.module.scss'
 import Panel from '../components/Panel'
 import Icon from '../components/Icon'
 import Title from '../components/Title'
-import FormModal from './FormModal'
+import AddStockFormModal from './AddStockFormModal'
 import throttle from '@/utils/throttle'
 import debounce from '@/utils/debounce'
 import request from '@/utils/request'
+import { columns } from './common'
 import * as API from '@/api/stock'
-import { type } from 'os'
 
 const list = [
   {
@@ -42,12 +43,18 @@ const list = [
 ]
 
 export default function ContentLeft() {
+  const [form] = Form.useForm() // 筛选表单
   const [holdData, setHoldData] = useState<any>([]) // 持仓
   const [holdRealData, setHoldRealData] = useState<any>([]) // 持仓实时
   const [optionalData, setOptionalData] = useState<any>([]) // 自选
   const [optionalRealData, setOptionalRealData] = useState<any>([]) // 自选实时
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false) // 添加股票弹框
   const [addType, setAddType] = useState<any>(null) // 1-持仓、0-自选
+  const [stockEditOpen, setStockEditOpen] = useState(false) // 持仓编辑弹框
+  const [confirmLoading, setConfirmLoading] = useState(false) // 表单弹窗确认loading
+  const [editDetailSpinLoading, setEditDetailSpinLoading] =
+    useState<boolean>(false) // 编辑loading
+
   useEffect(() => {
     getOptionalData()
     getHoldData()
@@ -63,6 +70,7 @@ export default function ContentLeft() {
     getOptionalRealData(holdData, 'hold')
   }, [holdData])
 
+  // 定时刷新持仓 / 自选
   useInterval(() => {
     if (holdData.length) {
       getOptionalRealData(holdData, 'hold')
@@ -110,9 +118,9 @@ export default function ContentLeft() {
             ...item,
             ...realList[i],
           }
+          newData.push(newItem)
         }
       }
-      newData.push(newItem)
     })
 
     return newData
@@ -160,12 +168,40 @@ export default function ContentLeft() {
       })
   }
 
+  // 自选/持仓刷新
   const handleReload = (type: any) => {
     if (type === '持仓') {
       getHoldData()
     } else {
       getOptionalData()
     }
+  }
+
+  // 持仓编辑保存
+  const onOk = async (payload: any) => {
+    console.log('🚀 ~ onOk ~ payload:', payload)
+
+    getHoldData()
+    setStockEditOpen(false)
+  }
+
+  // 持仓编辑弹框
+  const formModalProps = {
+    title: '持仓设置',
+    open: stockEditOpen,
+    loading: editDetailSpinLoading,
+    confirmLoading,
+    setEditDetailSpinLoading,
+    setConfirmLoading,
+    formProps: {
+      form,
+      name: 'stockEdit',
+      list: columns({}),
+    },
+    onCancel: () => {
+      setStockEditOpen(false)
+    },
+    onOk,
   }
 
   return (
@@ -175,8 +211,8 @@ export default function ContentLeft() {
           <Title name="持仓">
             <div className={styles.right}>
               <Icon
-                type="control"
-                tooltipProps={{ title: '排序' }}
+                type="sort"
+                tooltipProps={{ title: '升序/降序/不排序' }}
                 // onClick={handleClick}
               />
               <Icon
@@ -207,21 +243,53 @@ export default function ContentLeft() {
                 <div key={item.id} className={styles.tr}>
                   <div className={item.percent > 0 ? styles.up : styles.down}>
                     {item.percent > 0 && '+'}
-                    {item.percent}%
+                    {item.percent?.toFixed(2)}%
                   </div>
                   <div>{item.current}</div>
                   <div>{item.name}</div>
-                  <div>{item.holdNumber || '--'}</div>
-                  <div>{item.cost || '--'}</div>
+                  <div>{item.holdNumber || ' --'}</div>
+                  <div>{item.cost || ' --'}</div>
+                  <section className={styles.actionWrap}>
+                    <section className={styles.action}>
+                      <Icon
+                        type="moneycollect"
+                        tooltipProps={{ title: '持仓设置' }}
+                        onClick={() => {
+                          setStockEditOpen(true)
+                        }}
+                      />
+                      <Icon
+                        type="delete"
+                        tooltipProps={{ title: '删除' }}
+                        onClick={() => {}}
+                      />
+                      <Icon
+                        type="arrowup"
+                        tooltipProps={{ title: '上移' }}
+                        onClick={() => handleReload('持仓')}
+                      />
+                      <Icon
+                        type="arrowdown"
+                        tooltipProps={{ title: '下移' }}
+                        onClick={() => {}}
+                      />
+                      <Icon
+                        type="vertical-align-top"
+                        tooltipProps={{ title: '置顶' }}
+                        onClick={() => {}}
+                      />
+                    </section>
+                  </section>
                 </div>
               )
             })}
           </div>
+          <FormModal {...formModalProps} />
         </Panel>
         <Panel className={`${styles.box} ${styles.boxBottom} `}>
           <Title name="自选">
             <div className={styles.right}>
-              <Icon type="control" tooltipProps={{ title: '排序' }} />
+              <Icon type="sort" tooltipProps={{ title: '升序/降序/不排序' }} />
               <Icon
                 type="reload"
                 tooltipProps={{ title: '刷新' }}
@@ -251,7 +319,7 @@ export default function ContentLeft() {
                 <div key={item.id} className={styles.tr}>
                   <div className={item.percent > 0 ? styles.up : styles.down}>
                     {item.percent > 0 && '+'}
-                    {item.percent}%
+                    {item.percent?.toFixed(2)}%
                   </div>
                   <div className={item.percent >= 0 ? styles.up : styles.down}>
                     {item.current}
@@ -264,7 +332,7 @@ export default function ContentLeft() {
           </div>
         </Panel>
       </div>
-      <FormModal
+      <AddStockFormModal
         title={`添加${addType === 1 ? '持仓' : '自选'}`}
         open={isModalOpen}
         onAdd={handleAdd}

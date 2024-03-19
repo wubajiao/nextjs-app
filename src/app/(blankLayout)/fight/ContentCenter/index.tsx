@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 17:44:05
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-11-09 22:35:42
+ * @LastEditTime : 2024-03-18 15:30:18
  */
 'use client'
 import React, { useEffect, useState } from 'react'
@@ -210,9 +210,9 @@ export default function ContentCenter() {
   return (
     <div className={styles.contentCenter}>
       <Panel className={styles.total}>
-        {list.map((item) => {
+        {list.map((item: any, index) => {
           return (
-            <div key={item.name} className={styles.card}>
+            <div key={`${item.name}_${index}`} className={styles.card}>
               <div className={styles.label}>{item.name}</div>
               <div
                 className={`${styles.number} ${
@@ -226,9 +226,9 @@ export default function ContentCenter() {
         })}
       </Panel>
       <Panel className={styles.riseFall}>
-        {riseFall.map((item: any) => {
+        {riseFall.map((item: any, index: number) => {
           return (
-            <div key={item.name} className={styles.card}>
+            <div key={`${item.name}_${index}`} className={styles.card}>
               <div className={styles.label}>{item.name}</div>
               <div
                 className={`${styles.number} ${item.type === 1 && styles.up} ${
@@ -242,9 +242,9 @@ export default function ContentCenter() {
         })}
       </Panel>
       <Panel className={styles.dealVolume}>
-        {transactionVolume.map((item: any) => {
+        {transactionVolume.map((item: any, index: number) => {
           return (
-            <div key={item.name} className={styles.card}>
+            <div key={`${item.name}_${index}`} className={styles.card}>
               <div className={styles.label}>{item.name}</div>
               <div className={`${styles.number}`}>
                 {NP.round(NP.divide(item.amount, 100000000), 2)}亿
@@ -254,9 +254,9 @@ export default function ContentCenter() {
         })}
       </Panel>
       <Panel className={styles.fundDirection}>
-        {fundDirection.map((item: any) => {
+        {fundDirection.map((item: any, index: number) => {
           return (
-            <div key={item.BOARD_TYPE} className={styles.item}>
+            <div key={`${item.BOARD_TYPE}_${index}`} className={styles.item}>
               <div className={styles.top}>
                 <span style={{ marginRight: 6 }}>{item.BOARD_TYPE}</span>
                 <span>{item.FUNDS_DIRECTION}</span>
@@ -267,9 +267,9 @@ export default function ContentCenter() {
         })}
       </Panel>
       <Panel className={`${styles.dealVolume} ${styles.marketFlow}`}>
-        {marketFlow.map((item: any) => {
+        {marketFlow.map((item: any, index: number) => {
           return (
-            <div key={item.name} className={styles.card}>
+            <div key={`${item.name}_${index}`} className={styles.card}>
               <div className={styles.label}>{item.label}</div>
               <div
                 className={`${styles.number} ${

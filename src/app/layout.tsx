@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 10:13:32
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2024-01-18 12:04:44
+ * @LastEditTime : 2024-03-15 11:45:37
  */
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -42,7 +42,7 @@ export default function RootLayout({
       <head>
         {/* iconfont字体图标 */}
         <link
-          href="//at.alicdn.com/t/c/font_4271386_ccfzxxlom8e.css"
+          href="//at.alicdn.com/t/c/font_4271386_yyfusqnd37k.css"
           rel="stylesheet"
         />
         <link

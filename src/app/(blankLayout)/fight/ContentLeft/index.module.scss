@@ -26,6 +26,7 @@
       display: flex;
       justify-content: space-between;
       margin-bottom: 15px;
+      position: relative;
       div {
         width: 20%;
       }
@@ -34,6 +35,23 @@
       }
       .down {
         color: $down-color;
+      }
+      .actionWrap {
+        position: absolute;
+        right: 0;
+        top: 0;
+        display: none;
+        background-color: #2f54eb;
+        .action {
+          display: flex;
+          margin-right: 6px;
+        }
+      }
+
+      &:hover {
+        .actionWrap {
+          display: flex;
+        }
       }
     }
     .th {

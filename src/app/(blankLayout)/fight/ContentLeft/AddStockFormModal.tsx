@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-10-11 12:09:33
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-10-30 11:26:50
+ * @LastEditTime : 2024-03-18 12:13:06
  */
 'use client'
 
@@ -12,7 +12,7 @@ import { Modal, Button, Input, ConfigProvider, theme } from 'antd'
 import { useThrottleEffect } from 'ahooks'
 import request from '@/utils/request'
 
-import styles from './FormModal.module.scss'
+import styles from './AddStockFormModal.module.scss'
 
 export default function FormModal({
   title = '新增',

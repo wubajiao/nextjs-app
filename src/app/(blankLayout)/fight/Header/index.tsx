@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 17:44:05
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-11-09 22:30:43
+ * @LastEditTime : 2024-03-18 15:23:10
  */
 'use client'
 import React, { useState, useEffect } from 'react'
@@ -119,7 +119,7 @@ export default function Header() {
       </div>
       <div className={styles.right}>
         <div className={styles.list}>
-          {list.map((item: any) => {
+          {list.map((item: any, index: number) => {
             let name = ''
             switch (item.f12) {
               case `${STOCKS[0]}`:
@@ -133,7 +133,7 @@ export default function Header() {
                 break
             }
             return (
-              <div key={item.symbol} className={styles.item}>
+              <div key={`${item.symbol}_${index}`} className={styles.item}>
                 <div className={styles.label}>{name}</div>
                 <div
                   className={`${styles.total} ${

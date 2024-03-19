@@ -1,9 +1,9 @@
 /*
- * @Descripttion :
+ * @Descripttion : 登录注册弹框
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 14:59:23
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-10-31 16:02:49
+ * @LastEditTime : 2024-01-29 17:53:07
  */
 'use client'
 import React, { useState, useEffect } from 'react'
