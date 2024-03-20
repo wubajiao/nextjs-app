@@ -1,9 +1,9 @@
 /*
- * @Descripttion :
+ * @Descripttion : 在pages router模式下才使用，目前用的是app router
  * @Author       : wuhaidong
  * @Date         : 2023-10-11 11:46:57
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2023-10-11 15:04:51
+ * @LastEditTime : 2024-03-20 15:11:31
  */
 'use client'
 

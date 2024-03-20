@@ -3,11 +3,11 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 10:13:32
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2024-03-15 11:45:37
+ * @LastEditTime : 2024-03-20 15:10:15
  */
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import StyledComponentsRegistry from '../lib/AntdRegistry'
+import { AntdRegistry } from '@ant-design/nextjs-registry'
 import { ConfigProvider } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
 
@@ -78,7 +78,7 @@ export default function RootLayout({
         )}
       </head>
       <body className={inter.className}>
-        <StyledComponentsRegistry>
+        <AntdRegistry>
           <ConfigProvider
             locale={zhCN}
             theme={{
@@ -91,7 +91,7 @@ export default function RootLayout({
           >
             {children}
           </ConfigProvider>
-        </StyledComponentsRegistry>
+        </AntdRegistry>
       </body>
     </html>
   )
