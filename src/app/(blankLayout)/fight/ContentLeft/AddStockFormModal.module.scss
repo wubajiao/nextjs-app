@@ -1,7 +1,9 @@
+@import '@/assets/styles/scrollbar.scss';
 @import '../../_available.scss';
+
 .modal {
   /* 引用公告滚动条*/
-  @include scrollbar();
+  @include darkScrollbar();
   .input {
     margin-top: 20px;
   }

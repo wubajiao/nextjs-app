@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 17:44:05
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2024-03-18 17:59:43
+ * @LastEditTime : 2024-03-20 16:00:44
  */
 'use client'
 import React, { useState, useEffect } from 'react'
@@ -188,6 +188,7 @@ export default function ContentLeft() {
   // 持仓编辑弹框
   const formModalProps = {
     title: '持仓设置',
+    themeType: 'dark',
     open: stockEditOpen,
     loading: editDetailSpinLoading,
     confirmLoading,

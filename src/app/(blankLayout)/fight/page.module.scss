@@ -1,4 +1,4 @@
-@import '../_available.scss';
+@import '@/assets/styles/scrollbar.scss';
 
 .fightPage {
   width: 100%;
@@ -8,7 +8,7 @@
   color: #fff;
   overflow: hidden;
   .content {
-    @include scrollbar();
+    @include darkScrollbar();
     display: flex;
     justify-content: space-between;
   }

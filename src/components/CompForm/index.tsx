@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2024-03-18 10:34:49
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2024-03-19 18:17:15
+ * @LastEditTime : 2024-03-20 16:52:49
  */
 import React from 'react'
 import { Col } from 'antd'
@@ -29,7 +29,7 @@ const Comp = (v: any, form: any) => {
   const { width } = formItem
   const {
     type = 'input',
-    span = 12,
+    span = 24,
     hidden,
     display,
     rules: itemRules,
@@ -77,6 +77,7 @@ const Comp = (v: any, form: any) => {
       valuePropName,
       initialValue,
       hasFeedback,
+      hidden,
     }
     if (!newSChildProps.name) {
       delete newSChildProps.name

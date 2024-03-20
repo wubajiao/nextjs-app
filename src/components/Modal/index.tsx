@@ -3,10 +3,10 @@
  * @Author       : wuhaidong
  * @Date         : 2024-03-18 12:16:14
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2024-03-19 22:29:24
+ * @LastEditTime : 2024-03-20 17:00:02
  */
 import React, { useState, useRef } from 'react'
-import { Modal, Spin, message } from 'antd'
+import { Modal, Spin, message, ConfigProvider, theme } from 'antd'
 import Draggable from 'react-draggable'
 import request from '@/utils/request'
 import { initFormData } from '@/utils/dataFormat'
@@ -17,6 +17,7 @@ const ModalCustom = (props: any) => {
   const [bounds, setBounds] = useState({ left: 0, top: 0, bottom: 0, right: 0 })
   const draggleRef = useRef<HTMLDivElement>(null)
   const {
+    themeType = 'default',
     form,
     onOk,
     url = '', // 自动化请求必传url 参数默认为form表单  ；如需自定义及特殊业务请用onOk
@@ -46,13 +47,15 @@ const ModalCustom = (props: any) => {
     ...otherProps
   } = props
 
+  console.log('🚀 ~ ModalCustom ~ theme:', theme)
+
   // otherList 其他表单数组  比如自定义编辑表单配置列数组
   const { list = [], otherList = [] } = formProps
   const newList = [...list, ...otherList]
   const stylesProps = {
     body: {
       maxHeight: 'calc(100vh - 180px)',
-      minHeight: 400,
+      // minHeight: 400,
       overflowY: 'auto',
       padding: '20px',
     },
@@ -220,36 +223,46 @@ const ModalCustom = (props: any) => {
   }
   return (
     <section onClick={(e) => e.stopPropagation()}>
-      <Modal
-        width={width}
-        destroyOnClose
-        footer={footer}
-        onOk={handleOk}
-        okText={okText}
-        title={titleHtml}
-        centered={centered}
-        closable={closable}
-        className={`leeks-modal ${className}`}
-        cancelText={cancelText}
-        onCancel={handleCancel}
-        afterClose={handleClose}
-        maskClosable={maskClosable}
-        okButtonProps={okButtonProps}
-        confirmLoading={confirmLoading}
-        styles={stylesProps}
-        {...otherProps}
-        modalRender={(modal) => (
-          <Draggable
-            disabled={disabled}
-            bounds={bounds}
-            onStart={(event, uiData) => onStart(event, uiData)}
-          >
-            <div ref={draggleRef}>{modal}</div>
-          </Draggable>
-        )}
+      <ConfigProvider
+        theme={{
+          // 1. 单独使用暗色算法
+          algorithm:
+            themeType === 'default'
+              ? theme.defaultAlgorithm
+              : theme.darkAlgorithm,
+        }}
       >
-        {isLoading ? <Spin {...spinProps}>{children}</Spin> : children}
-      </Modal>
+        <Modal
+          width={width}
+          destroyOnClose
+          footer={footer}
+          onOk={handleOk}
+          okText={okText}
+          title={titleHtml}
+          centered={centered}
+          closable={closable}
+          className={`leeks-modal ${className}`}
+          cancelText={cancelText}
+          onCancel={handleCancel}
+          afterClose={handleClose}
+          maskClosable={maskClosable}
+          okButtonProps={okButtonProps}
+          confirmLoading={confirmLoading}
+          styles={stylesProps}
+          {...otherProps}
+          modalRender={(modal) => (
+            <Draggable
+              disabled={disabled}
+              bounds={bounds}
+              onStart={(event, uiData) => onStart(event, uiData)}
+            >
+              <div ref={draggleRef}>{modal}</div>
+            </Draggable>
+          )}
+        >
+          {isLoading ? <Spin {...spinProps}>{children}</Spin> : children}
+        </Modal>
+      </ConfigProvider>
     </section>
   )
 }
