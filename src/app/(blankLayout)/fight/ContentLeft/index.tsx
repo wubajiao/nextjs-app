@@ -2,14 +2,16 @@
  * @Descripttion :
  * @Author       : wuhaidong
  * @Date         : 2023-09-27 17:44:05
- * @LastEditors  : wuhaidong
- * @LastEditTime : 2024-03-20 16:00:44
+ * @LastEditors: hayden 1058486292@qq.com
+ * @LastEditTime: 2024-03-21 22:55:34
  */
 'use client'
 import React, { useState, useEffect } from 'react'
 import { message, Form } from 'antd'
 import FormModal from '@/components/FormModal'
+import ConfirmModal from '@/components/Modal/ConfirmModal'
 import { useInterval } from 'ahooks'
+import _ from 'lodash'
 import styles from './index.module.scss'
 import Panel from '../components/Panel'
 import Icon from '../components/Icon'
@@ -46,19 +48,44 @@ export default function ContentLeft() {
   const [form] = Form.useForm() // 筛选表单
   const [holdData, setHoldData] = useState<any>([]) // 持仓
   const [holdRealData, setHoldRealData] = useState<any>([]) // 持仓实时
+  const [holdRealDataSort, setHoldRealDataSort] = useState<any>([]) // 持仓实时-排序后
   const [optionalData, setOptionalData] = useState<any>([]) // 自选
   const [optionalRealData, setOptionalRealData] = useState<any>([]) // 自选实时
+  const [optionalRealDataSort, setOptionalRealDataSort] = useState<any>([]) // 自选实时-排序后
   const [isModalOpen, setIsModalOpen] = useState(false) // 添加股票弹框
   const [addType, setAddType] = useState<any>(null) // 1-持仓、0-自选
   const [stockEditOpen, setStockEditOpen] = useState(false) // 持仓编辑弹框
   const [confirmLoading, setConfirmLoading] = useState(false) // 表单弹窗确认loading
   const [editDetailSpinLoading, setEditDetailSpinLoading] =
     useState<boolean>(false) // 编辑loading
+  const [holdSortType, setHoldSortType] = useState<any>(0) //持仓排序：0不排序、1升序、2降序
+  const [optionalSortType, setOptionalSortType] = useState(0) //自选排序：0不排序、1升序、2降序
 
   useEffect(() => {
     getOptionalData()
     getHoldData()
+    // 初始化持仓排序
+    const holdSortTypeNumber = parseInt(
+      localStorage.getItem('holdSortType') || '0'
+    )
+    setHoldSortType(holdSortTypeNumber)
+
+    // 初始化自选排序
+    const ptionalSortTypeNumber = parseInt(
+      localStorage.getItem('holdSortType') || '0'
+    )
+    setOptionalSortType(ptionalSortTypeNumber)
   }, [])
+
+  useEffect(() => {
+    const newHoldRealData = getSortData(holdRealData, holdSortType)
+    setHoldRealDataSort(newHoldRealData)
+  }, [holdSortType, holdRealData])
+
+  useEffect(() => {
+    const newOptionalRealData = getSortData(optionalRealData, optionalSortType)
+    setOptionalRealDataSort(newOptionalRealData)
+  }, [optionalSortType, optionalRealData])
 
   useEffect(() => {
     if (!optionalData.length) return
@@ -146,6 +173,20 @@ export default function ContentLeft() {
       })
   }
 
+  // 排序函数
+  const getSortData = (data: any, sortType: number) => {
+    const newData = _.cloneDeep(data)
+    if (sortType === 1) {
+      // 升序
+      return newData.sort((a: any, b: any) => a.percent - b.percent)
+    } else if (sortType === 2) {
+      // 降序
+      return newData.sort((a: any, b: any) => b.percent - a.percent)
+    } else {
+      return newData
+    }
+  }
+
   const handleAdd = (item: any) => {
     request
       .post(API.stock, {
@@ -168,24 +209,67 @@ export default function ContentLeft() {
       })
   }
 
-  // 自选/持仓刷新
+  // 自选/持仓刷新 type=1持仓、0自选
   const handleReload = (type: any) => {
-    if (type === '持仓') {
+    if (type === 1) {
       getHoldData()
     } else {
       getOptionalData()
     }
   }
 
+  // 排序 type=1持仓、type=0自选
+  const handleSort = (type: any) => {
+    // 0不排序、1升序、2降序
+    if (type === 1) {
+      let currentSort: any = holdSortType + 1
+      if (currentSort === 3) {
+        setHoldSortType(0)
+        currentSort = 0
+      } else {
+        setHoldSortType(currentSort)
+      }
+      localStorage.setItem('holdSortType', currentSort)
+    } else {
+      let currentSort: any = optionalSortType + 1
+      if (currentSort === 3) {
+        setOptionalSortType(0)
+        currentSort = 0
+      } else {
+        setOptionalSortType(currentSort)
+      }
+      localStorage.setItem('optionalSortType', currentSort)
+    }
+  }
+
   // 持仓编辑保存
   const onOk = async (payload: any) => {
     console.log('🚀 ~ onOk ~ payload:', payload)
-
+    // TODO
     getHoldData()
     setStockEditOpen(false)
   }
 
-  // 持仓编辑弹框
+  // 删除 type=1持仓 type=0自选
+  const handleDelete = (item: any, type = 1) => {
+    const payload: any = {}
+    if (type === 1) {
+      payload.type = 0
+    } else {
+      payload.type = 0
+      payload.isDeleted = true
+    }
+
+    ConfirmModal({
+      text: `删除-${item.name}?`,
+      record: item,
+      url: API.stock,
+      payload,
+      getListData: getHoldData,
+    })
+  }
+
+  // 持仓编辑弹框  ·
   const formModalProps = {
     title: '持仓设置',
     themeType: 'dark',
@@ -214,12 +298,12 @@ export default function ContentLeft() {
               <Icon
                 type="sort"
                 tooltipProps={{ title: '升序/降序/不排序' }}
-                // onClick={handleClick}
+                onClick={() => handleSort(1)}
               />
               <Icon
                 type="reload"
                 tooltipProps={{ title: '刷新' }}
-                onClick={() => handleReload('持仓')}
+                onClick={() => handleReload(1)}
               />
               <Icon
                 type="plus"
@@ -239,7 +323,7 @@ export default function ContentLeft() {
             <div>持仓成本</div>
           </div>
           <div className={styles.tbody}>
-            {holdRealData.map((item: any) => {
+            {holdRealDataSort.map((item: any) => {
               return (
                 <div key={item.id} className={styles.tr}>
                   <div className={item.percent > 0 ? styles.up : styles.down}>
@@ -262,12 +346,12 @@ export default function ContentLeft() {
                       <Icon
                         type="delete"
                         tooltipProps={{ title: '删除' }}
-                        onClick={() => {}}
+                        onClick={() => handleDelete(item, 1)}
                       />
                       <Icon
                         type="arrowup"
                         tooltipProps={{ title: '上移' }}
-                        onClick={() => handleReload('持仓')}
+                        onClick={() => handleReload(1)}
                       />
                       <Icon
                         type="arrowdown"
@@ -290,11 +374,15 @@ export default function ContentLeft() {
         <Panel className={`${styles.box} ${styles.boxBottom} `}>
           <Title name="自选">
             <div className={styles.right}>
-              <Icon type="sort" tooltipProps={{ title: '升序/降序/不排序' }} />
+              <Icon
+                type="sort"
+                tooltipProps={{ title: '升序/降序/不排序' }}
+                onClick={() => handleSort(0)}
+              />
               <Icon
                 type="reload"
                 tooltipProps={{ title: '刷新' }}
-                onClick={() => handleReload('自选')}
+                onClick={() => handleReload(0)}
               />
               <Icon
                 type="plus"
@@ -314,7 +402,7 @@ export default function ContentLeft() {
             <div>成交量</div>
           </div>
           <div className={styles.tbody}>
-            {optionalRealData.map((item: any) => {
+            {optionalRealDataSort.map((item: any) => {
               const volume = Math.floor(item?.volume / 100)
               return (
                 <div key={item.id} className={styles.tr}>

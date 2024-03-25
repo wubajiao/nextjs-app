@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2024-03-18 12:16:14
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2024-03-20 17:00:02
+ * @LastEditTime : 2024-03-20 21:45:08
  */
 import React, { useState, useRef } from 'react'
 import { Modal, Spin, message, ConfigProvider, theme } from 'antd'
@@ -46,8 +46,6 @@ const ModalCustom = (props: any) => {
     setEditDetailSpinLoading,
     ...otherProps
   } = props
-
-  console.log('🚀 ~ ModalCustom ~ theme:', theme)
 
   // otherList 其他表单数组  比如自定义编辑表单配置列数组
   const { list = [], otherList = [] } = formProps

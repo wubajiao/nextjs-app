@@ -3,7 +3,7 @@
  * @Author       : wuhaidong
  * @Date         : 2024-03-18 11:53:50
  * @LastEditors  : wuhaidong
- * @LastEditTime : 2024-03-18 12:10:36
+ * @LastEditTime : 2024-03-25 10:00:57
  */
 import { Modal, message } from 'antd'
 import _ from 'lodash'
@@ -26,7 +26,7 @@ const ConfirmModal = ({
   onOk,
   url,
   getListData,
-  payload,
+  payload = {},
   ...otherProps
 }: ConfirmModalProps) => {
   // 默认提示语
@@ -37,6 +37,7 @@ const ConfirmModal = ({
       _.isArray(record) ? record.length : ''
     }项？`
   }
+
   Modal.confirm({
     title: '注意',
     content: text || content,
@@ -47,7 +48,7 @@ const ConfirmModal = ({
     onOk: async () => {
       if (url) {
         request
-          .delete(url)
+          .patch(`${url}/${record.id}`, payload)
           .then(() => {
             message.success('操作成功')
             if (getListData) {
